@@ -21,10 +21,6 @@
     "outDir": "release",
     "declarationDir": "release"
   },
-  "files": [
-    "build/declarations.d.ts",
-    "build/index.ts"
-  ],
   "exclude": [
     "node_modules",
     "demo"

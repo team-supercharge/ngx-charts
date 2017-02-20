@@ -17,6 +17,6 @@ replace({
 /**
  * ngc output pathing is totally wrong
  */
-fs.copySync('./release/build', './release');
+// fs.copySync('./release/build', './release');
 fs.removeSync('./release/node_modules')
-fs.removeSync('./release/build')
+// fs.removeSync('./release/build')

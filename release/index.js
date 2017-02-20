@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.1.2" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.1.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -10651,6 +10651,9 @@ var GaugeComponent = (function (_super) {
     };
     GaugeComponent.prototype.getDisplayValue = function () {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
+        if (this.textValue && 0 !== this.textValue.length) {
+            return this.textValue.toLocaleString();
+        }
         return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function (repeat) {
@@ -10726,6 +10729,10 @@ var GaugeComponent = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], GaugeComponent.prototype, "textValue", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
@@ -12142,7 +12149,7 @@ var LineSeriesComponent = (function () {
             this.hasGradient = true;
             var pageUrl = this.location.path();
             this.gradientId = 'grad' + id_1.id().toString();
-            this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
+            this.gradientUrl = "url(#" + this.gradientId + ")";
             var values = this.data.series.map(function (d) { return d.value; });
             var max = Math.max.apply(Math, values);
             var min = Math.min.apply(Math, values);
@@ -12206,7 +12213,7 @@ var LineSeriesComponent = (function () {
     LineSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-line-series]',
-            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient *ngIf=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [common_1.Location])

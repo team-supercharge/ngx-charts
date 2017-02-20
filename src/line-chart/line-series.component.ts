@@ -15,7 +15,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   template: `
     <svg:g>
       <defs>
-        <svg:g ngx-charts-svg-linear-gradient ng-if="hasGradient"
+        <svg:g ngx-charts-svg-linear-gradient *ngIf="hasGradient"
           [color]="colors.getColor(data.name)"
           orientation="vertical"
           [name]="gradientId"
@@ -163,7 +163,7 @@ export class LineSeriesComponent implements OnChanges {
       this.hasGradient = true;
       const pageUrl = this.location.path();
       this.gradientId = 'grad' + id().toString();
-      this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+      this.gradientUrl = `url(#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);
       const max = Math.max(...values);
       const min = Math.min(...values);
