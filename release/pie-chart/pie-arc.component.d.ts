@@ -30,5 +30,6 @@ export declare class PieArcComponent implements OnChanges {
     calculateArc(): any;
     loadAnimation(): void;
     updateAnimation(): void;
+    updateCurrent(): void;
     onClick(): void;
 }

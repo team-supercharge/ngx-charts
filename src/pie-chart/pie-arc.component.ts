@@ -91,6 +91,8 @@ export class PieArcComponent implements OnChanges {
         this.loadAnimation();
         this.initialized = true;
       }
+    } else {
+      this.updateCurrent();
     }
 
   }
@@ -154,6 +156,18 @@ export class PieArcComponent implements OnChanges {
           return calc(interpolater(t));
         };
       });
+  }
+
+  updateCurrent(): void {
+    const node = select(this.element)
+      .selectAll('.arc')
+      .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+
+    this.calculateArc();
+
+    node.each(function(d) {
+      (<any>this)._current = d;
+    });
   }
 
   onClick(): void {

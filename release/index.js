@@ -16611,6 +16611,9 @@ var PieArcComponent = /** @class */ (function () {
                 this.initialized = true;
             }
         }
+        else {
+            this.updateCurrent();
+        }
     };
     PieArcComponent.prototype.calculateArc = function () {
         var outerRadius = this.outerRadius;
@@ -16663,6 +16666,15 @@ var PieArcComponent = /** @class */ (function () {
             return function (t) {
                 return calc(interpolater(t));
             };
+        });
+    };
+    PieArcComponent.prototype.updateCurrent = function () {
+        var node = Object(__WEBPACK_IMPORTED_MODULE_2_d3_selection__["select"])(this.element)
+            .selectAll('.arc')
+            .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        this.calculateArc();
+        node.each(function (d) {
+            this._current = d;
         });
     };
     PieArcComponent.prototype.onClick = function () {
